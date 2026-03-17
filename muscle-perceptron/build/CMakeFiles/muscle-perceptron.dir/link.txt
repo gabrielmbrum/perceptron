@@ -1,1 +1,0 @@
-/usr/bin/c++ "CMakeFiles/muscle-perceptron.dir/main.cpp.o" "CMakeFiles/muscle-perceptron.dir/perceptron.cpp.o" -o muscle-perceptron 
