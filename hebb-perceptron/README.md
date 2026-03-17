@@ -1,6 +1,10 @@
-# biased-perceptron
+# hebb-perceptron
 
-the bias is a measure that says how easy it is to get the perceptron to output a 1
+this perceptron implements the hebb rule for adjusting the weigths of the features
+
+beyond that, a new parameter is added to the $g(u)$ function, the bias:
+
+it is a measure that says how easy it is to get the perceptron to output a 1
 
 <p align="center">
   <img src="assets/image1.png" alt="output formula">
@@ -14,4 +18,4 @@ a example of a percpetron with two inputs (w = -2) and bias = 3, we have:
   <img src="assets/image2.png" alt="percep diagram">
 </p>
 
-this is a NAND logic gate
+(this diagram shows a NAND logic gate)
