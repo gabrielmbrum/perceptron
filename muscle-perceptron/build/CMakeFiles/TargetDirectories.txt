@@ -1,0 +1,3 @@
+/home/brum/obsidian/pos-graduacao/redes-neurais/src/perceptron/muscle-perceptron/build/CMakeFiles/muscle-perceptron.dir
+/home/brum/obsidian/pos-graduacao/redes-neurais/src/perceptron/muscle-perceptron/build/CMakeFiles/edit_cache.dir
+/home/brum/obsidian/pos-graduacao/redes-neurais/src/perceptron/muscle-perceptron/build/CMakeFiles/rebuild_cache.dir
