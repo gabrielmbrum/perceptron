@@ -11,8 +11,13 @@ int threshold = sum_array(weights) / 2;
 ```
 
 the diagram of the perceptron is like:
-![perceptron diagram](assets/image2.png)
+
+<p align="center">
+  <img src="assets/image2.png" alt="perceptron diagram">
+</p>
 
 the `threshold` is the limiar of the perceptron, that means that what decides if the output of the perceptron will be 0 or 1 is if the $w * x$ is greater than, or equal, to the threshold
 
-![output calculation](assets/image1.png)
+<p align="center">
+  <img src="assets/image1.png" alt="output calculation">
+</p>
