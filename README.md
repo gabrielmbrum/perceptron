@@ -9,4 +9,5 @@ here, i will be coding some code examples of a perceptron (or multiple perceptro
 # references
 
 Neural Networks and Deep Learning - Michael Nielsen [http://neuralnetworksanddeeplearning.com/]
+
 Master's Degree Classes - Prof. Dr. Lucas C. Ribas [https://www.ibilce.unesp.br/#!/departamentos/cienc-comp-estatistica/docentes/lucas-correia-ribas/]
