@@ -4,7 +4,7 @@ This perceptron project is from a master's degree class. It was built to process
 
 The weight balancing is performed using the Hebb rule.
 
-![diagram](image.png)
+![diagram](img/image.png)
 
 ## Functions
 
