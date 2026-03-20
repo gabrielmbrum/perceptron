@@ -62,7 +62,7 @@ Conduct new tests, varying:
 
 - Check learning rate $\eta \in \{0.1, 0.001, 0.0001\}$
 
-- Number of epochs $\in \{100, 200\}$
+- Number of epochs $\in \{100, 200, 400\}$
 
 For each parameter combination, perform training and testing, plotting the accuracy for each combination.
 
@@ -70,4 +70,4 @@ For each combination, plot the classification error vs. epochs.
 
 Discuss the results and explain what's happening in each case.
 
-*Optional:* Train and test several times, calculate the average and standard deviation of the accuracies.
+Trained and tested 10 times each configuration, to calculate accuracies average and standard deviation.
