@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
+import random
 
 def load_data(train_db, test_db):
 
@@ -92,7 +93,7 @@ class Perceptron:
         self.learning_rate = learning_rate
         self.epochs =  epochs
         self.weights = np.random.rand(n_features)
-        self.bias = np.random.rand()
+        self.bias = random.uniform(-1, 1)
 
     def activation_potential(self, x):
         # u = w1*x1 + w2*x2 + ... + wn*xn - b
@@ -167,11 +168,11 @@ class Perceptron:
         def plot_decision_boundary(X, y, title, filename):
             plt.figure(figsize=(10, 6))
             
-            class_1_indices = np.where(y[0] == 1)[0]
-            class_minus_1_indices = np.where(y[0] == -1)[0]
+            class_A = np.where(y[0] == 1)[0]
+            class_B = np.where(y[0] == -1)[0]
             
-            plt.scatter(X[0, class_1_indices], X[1, class_1_indices], color='blue', label='Class 1')
-            plt.scatter(X[0, class_minus_1_indices], X[1, class_minus_1_indices], color='red', label='Class -1')
+            plt.scatter(X[0, class_A], X[1, class_A], color='blue', label='Class 1')
+            plt.scatter(X[0, class_B], X[1, class_B], color='red', label='Class -1')
             
             x1_values = np.linspace(-5, 5, 100)
             

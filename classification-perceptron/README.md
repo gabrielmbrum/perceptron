@@ -1,4 +1,4 @@
-# Hebb Classification Perceptron
+# Classification Perceptron
 
 This perceptron project is from a master's degree class. It was built to process a training set to discover the weights of *n* parameters and then evaluate its performance on a test set.
 
