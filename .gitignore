@@ -6,3 +6,5 @@ classification-perceptron/data/atividade1.pdf
 classification-perceptron/src/.venv/
 
 adaline/src/.venv/
+
+adaline/output/

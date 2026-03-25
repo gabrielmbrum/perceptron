@@ -9,7 +9,7 @@
 \usepackage{geometry}
 \geometry{a4paper, margin=2.5cm}
 
-\title{Classification with ADALINE Network}
+\title{Classification with ADALINE Network: Impact of Early Stopping}
 \author{Gabriel Brum}
 \date{\today}
 
@@ -18,104 +18,108 @@
 \maketitle
 
 \section{Introduction}
-The ADALINE (Adaptive Linear Element) is a single-layer neural network that uses the Delta Rule for weight updates[cite: 3]. Unlike the Perceptron, the error is calculated based on the continuous activation potential ($u$), allowing for the minimization of the Mean Squared Error (MSE) through gradient descent[cite: 4]. This report analyzes the behavior of ADALINE using two optimization approaches: Stochastic Gradient (sample-by-sample update) and Batch Gradient (update per epoch)[cite: 5].
+The ADALINE (Adaptive Linear Element) is a single-layer neural network that uses the Delta Rule for weight updates. Unlike the Perceptron, the error is calculated based on the continuous activation potential ($u$), allowing for the minimization of the Mean Squared Error (MSE) through gradient descent. This report analyzes the behavior of ADALINE using two optimization approaches: Stochastic Gradient Descent (SGD) and Batch Gradient Descent. Crucially, this analysis investigates a specific phenomenon observed during testing: how defining the stopping criterion by the absolute difference between the current and previous error ($|E_t - E_{t-1}| \le \epsilon$) can trigger premature early stopping, preventing the model from achieving optimal test results.
 
 \section{Dataset 1: Linearly Separable Data}
 
 \subsection{Error Evolution (MSE and Classification)}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.45\textwidth]{output/dataset1/plots/mse_evolution_stochastic.png}
-    \includegraphics[width=0.45\textwidth]{output/dataset1/plots/classification_error_stochastic.png}
+    \includegraphics[width=0.45\textwidth]{output/dataset1/mse_evolution_sgd.png}
+    \includegraphics[width=0.45\textwidth]{output/dataset1/classification_error_sgd.png}
     \caption{MSE and Classification Error Evolution (Stochastic).}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.45\textwidth]{output/dataset1/plots/mse_evolution_batch.png}
-    \includegraphics[width=0.45\textwidth]{output/dataset1/plots/classification_error_batch.png}
+    \includegraphics[width=0.45\textwidth]{output/dataset1/mse_evolution_batch.png}
+    \includegraphics[width=0.45\textwidth]{output/dataset1/classification_error_batch.png}
     \caption{MSE and Classification Error Evolution (Batch).}
 \end{figure}
 
 \subsection{Decision Boundaries (Train and Test)}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.45\textwidth]{output/dataset1/plots/boundary_train_stochastic.png}
-    \includegraphics[width=0.45\textwidth]{output/dataset1/plots/boundary_test_stochastic.png}
+    \includegraphics[width=0.45\textwidth]{output/dataset1/train_decision_boundary_sgd.png}
+    \includegraphics[width=0.45\textwidth]{output/dataset1/test_decision_boundary_sgd.png}
     \caption{Decision Boundaries in Training and Testing (Stochastic).}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.45\textwidth]{output/dataset1/plots/boundary_train_batch.png}
-    \includegraphics[width=0.45\textwidth]{output/dataset1/plots/boundary_test_batch.png}
+    \includegraphics[width=0.45\textwidth]{output/dataset1/train_decision_boundary_batch.png}
+    \includegraphics[width=0.45\textwidth]{output/dataset1/test_decision_boundary_batch.png}
     \caption{Decision Boundaries in Training and Testing (Batch).}
 \end{figure}
 
 \subsection{Discussion of Results}
-\textbf{Stochastic Gradient:} Showed rapid convergence, adjusting the hyperplane to perfectly separate the classes in a few epochs[cite: 7]. The error descent showed natural oscillations due to the sample-by-sample update[cite: 8].
+Despite the data being linearly separable, the stopping criterion severely truncated the learning process. 
 
-\textbf{Batch Gradient:} The MSE evolution was notably smoother and more stable[cite: 9]. Since the data is perfectly separable, both methods found an optimal boundary centered between the class margins, generalizing perfectly to the test set[cite: 10].
+\textbf{Stochastic Gradient:} Training stopped prematurely at epoch 6 due to the precision criterion. While the model achieved a high accuracy of 95.00\% on the test set, it still recorded 6 misclassifications in the training set at the final epoch. This indicates that stopping based on the immediate error difference prevented the algorithm from finding the perfect linear separation.
 
-\section{Dataset 2: Non-Linearly Separable Data (Noise)}
+\textbf{Batch Gradient:} Exhibited an even more drastic early stop at epoch 2. It achieved the same 95.00\% test accuracy but with 7 training misclassifications. Because the Batch method averages the gradients, the error descent is smoother; thus, the difference between epoch 1 and 2 was small enough to trigger the precision threshold almost immediately, halting convergence.
+
+\section{Dataset 2: Non-Linearly Separable Data}
 
 \subsection{Error Evolution (MSE and Classification)}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.45\textwidth]{output/dataset2/plots/mse_evolution_stochastic.png}
-    \includegraphics[width=0.45\textwidth]{output/dataset2/plots/classification_error_stochastic.png}
+    \includegraphics[width=0.45\textwidth]{output/dataset2/mse_evolution_sgd.png}
+    \includegraphics[width=0.45\textwidth]{output/dataset2/classification_error_sgd.png}
     \caption{MSE and Classification Error Evolution (Stochastic).}
 \end{figure}
 
 \subsection{Decision Boundaries (Train and Test)}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.45\textwidth]{output/dataset2/plots/boundary_train_stochastic.png}
-    \includegraphics[width=0.45\textwidth]{output/dataset2/plots/boundary_test_stochastic.png}
+    \includegraphics[width=0.45\textwidth]{output/dataset2/train_decision_boundary_sgd.png}
+    \includegraphics[width=0.45\textwidth]{output/dataset2/test_decision_boundary_sgd.png}
     \caption{Decision Boundaries in Training and Testing with Noise (Stochastic).}
 \end{figure}
 
 \subsection{Discussion of Results}
-In this dataset, the presence of noise (overlap) prevents the classification error from reaching zero[cite: 12].
+In this dataset, the presence of noise creates overlapping regions between classes.
 
-\textbf{Stochastic Gradient:} The algorithm continued to attempt adjustments to the noise, which generated noticeable fluctuations in the hyperplane during training[cite: 13]. However, due to the nature of the Least Mean Squares, the model stabilized at the best possible global solution[cite: 14].
+\textbf{Stochastic Gradient:} The noisy nature of this dataset caused the SGD to trigger the early stopping condition at just epoch 2. This yielded an accuracy of 61.33\% on the test set with 83 misclassifications in training. The sample-by-sample update combined with noise caused immediate error fluctuation that mistakenly signaled convergence to the stopping function.
 
-\textbf{Batch Gradient:} Proved to be more robust to local noise, as the accumulation of gradients cancels out individual perturbations from overlapping samples[cite: 15]. The final hyperplane accommodated the noise stably, ensuring consistent accuracy in both training and testing[cite: 16].
+\textbf{Batch Gradient:} The batch approach accumulated the gradients, making it slightly more robust to local noise fluctuations and bypassing the premature stop of the initial epochs. It managed to train until epoch 40 before the precision criterion triggered. However, the final test accuracy was slightly lower (60.00\%) with 87 misclassifications.
 
 \section{Dataset 3: High Dimensionality and Hyperparameters}
 
 \subsection{Accuracy in Training and Test Sets}
-Table 1 presents the final metrics for each combination tested in Dataset 3 (10 input variables)[cite: 17].
+Table 1 presents the final metrics for each combination tested in Dataset 3 across 10 independent runs. Runs without a specific early stop epoch implies the model reached the maximum epoch limit.
 
 \begin{table}[H]
 \centering
-\caption{Accuracies and Convergence Epochs by Configuration (Dataset 3)}
-\begin{tabular}{@{}llccrr@{}}
+\caption{Mean Test Accuracies and Convergence Epochs by Configuration (Dataset 3)}
+\begin{tabular}{@{}llccr@{}}
 \toprule
-\textbf{Method} & \textbf{Rate ($\eta$)} & \textbf{Precision ($\epsilon$)} & \textbf{Epochs} & \textbf{Train Acc (\%)} & \textbf{Test Acc (\%)} \\ \midrule
-Stochastic  & 0.01      & 0.1       & 100 & 93.88 & 85.71 \\
-Stochastic  & 0.01      & 0.0001    & 100 & 93.88 & 85.71 \\
-Stochastic  & 0.001     & 0.1       & 100 & 93.88 & 85.71 \\
-Stochastic  & 0.001     & 0.0001    & 100 & 93.88 & 85.71 \\
-Stochastic  & 0.0001    & 0.1       & 100 & 87.76 & 79.37 \\
-Stochastic  & 0.0001    & 0.0001    & 100 & 87.76 & 79.37 \\ \midrule
-Batch       & 0.01      & 0.1       & 100 & 75.51 & 71.43 \\
-Batch       & 0.01      & 0.0001    & 100 & 75.51 & 71.43 \\
-Batch       & 0.001     & 0.1       & 100 & 51.02 & 44.44 \\
-Batch       & 0.001     & 0.0001    & 100 & 51.02 & 44.44 \\
-Batch       & 0.0001    & 0.1       & 100 & 49.66 & 44.44 \\
-Batch       & 0.0001    & 0.0001    & 100 & 49.66 & 44.44 \\ \bottomrule
+\textbf{Method} & \textbf{Rate ($\eta$)} & \textbf{Precision ($\epsilon$)} & \textbf{Stop Epoch} & \textbf{Mean Acc (\%)} \\ \midrule
+Stochastic  & 0.01      & 0.1       & 3 & 87.30 \\
+Stochastic  & 0.01      & 0.0001    & 4 & 85.71 \\
+Stochastic  & 0.001     & 0.1       & 9 & 77.78 \\
+Stochastic  & 0.001     & 0.0001    & 35 & 87.30 \\
+Stochastic  & 0.0001    & 0.1       & 18 & 61.90 \\
+Stochastic  & 0.0001    & 0.0001    & Max & 79.37 \\ \midrule
+Batch       & 0.01      & 0.1       & Max & 66.67 \\
+Batch       & 0.01      & 0.0001    & Max & 66.67 \\
+Batch       & 0.001     & 0.1       & 9 & 79.37 \\
+Batch       & 0.001     & 0.0001    & 35 & 85.71 \\
+Batch       & 0.0001    & 0.1       & 19 & 61.90 \\
+Batch       & 0.0001    & 0.0001    & Max & 79.37 \\ \bottomrule
 \end{tabular}
 \end{table}
 
 \subsection{Discussion of Results}
-In a 10-dimensional scenario, the choice of weight update method and hyperparameter tuning proved decisive for convergence success[cite: 21].
+In a high-dimensional scenario, the choice of hyperparameters clearly exposed the flaws of the relative error stopping criterion.
 
-\textbf{Stochastic Gradient:} Proved to be the most effective strategy for this dataset[cite: 22]. With learning rates of $\eta = 0.01$ and $\eta = 0.001$, the model achieved the highest recorded accuracies: 93.88\% in training and 85.71\% in testing[cite: 1, 23]. The final mean squared error ($MSE \approx 0.32$) was substantially lower than that of the batch method, indicating that sample-by-sample updates allowed ADALINE to navigate the complex error surface of the 10 variables more efficiently[cite: 1, 24]. Even with a lower rate ($\eta = 0.0001$), performance (87.76\% training) still outperformed any configuration in Batch mode[cite: 1, 25].
+\textbf{Impact of Precision ($\epsilon$):} When using a looser precision ($\epsilon = 0.1$), the model stopped too early across both methods. For instance, with $\eta = 0.001$, SGD stopped at epoch 9 yielding only 77.78\% accuracy. By tightening the precision to $\epsilon = 0.0001$, the model was forced to train until epoch 35, which significantly improved the test accuracy to 87.30\%. 
 
-\textbf{Batch Gradient:} Showed inferior performance and greater difficulty in converging within the stipulated 100 epochs[cite: 1, 26]. The best accuracy obtained was only 75.51\% in training and 71.43\% in testing with $\eta = 0.01$[cite: 1, 27]. By reducing the learning rate to $0.001$ or $0.0001$, the model suffered severe degradation, with accuracies falling to the 49-51\% range and the MSE jumping to values above 4.0[cite: 1, 28]. This suggests that for this higher-dimensional problem, the update per epoch was too slow to adjust weights properly, resulting in a model that failed to learn essential patterns within the available time[cite: 29].
+\textbf{Method Comparison:} Overall, SGD achieved the highest peak accuracy (87.30\%) compared to Batch (85.71\%). Batch training struggled particularly with larger learning rates ($\eta = 0.01$), stalling at 66.67\% accuracy. This reinforces that while Batch is more stable, SGD's ability to navigate complex error surfaces allows it to find better minima in high-dimensional spaces, provided the stopping criterion does not halt it prematurely.
 
 \section{Conclusion}
-This activity demonstrated the structural advantages of the Delta Rule in the ADALINE network[cite: 30]. In noisy data (Dataset 2), ADALINE overcame the classic limitations of the Perceptron by accommodating noise without diverging[cite: 31]. In Dataset 3, the comparative analysis revealed that the Stochastic Gradient method is more effective for high-dimensional problems, achieving significantly higher accuracy and lower MSE than the Batch mode under the same conditions[cite: 1].
+This activity demonstrated the behavior of the ADALINE network under different optimization techniques. The most critical finding of this report is that utilizing the absolute difference between consecutive epoch errors ($|E_t - E_{t-1}|$) as a stopping criterion is a flawed approach. As observed across all three datasets, the learning curve can flatten temporarily or descend slowly, triggering a stop long before the global minimum is reached. 
+
+While Stochastic Gradient Descent generally achieved better peak accuracies than Batch Gradient Descent in high-dimensional spaces, both methods were heavily bottlenecked by premature stopping. Future implementations should consider alternative stopping criteria, such as evaluating the error on a separate validation set or using a "patience" threshold that waits for multiple epochs of non-improvement before halting the training.
 
 \end{document}
