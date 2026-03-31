@@ -28,7 +28,7 @@ void intro() {
   cout << "-------------------------------------\n";
   cout << "welcome to perceptron simulator!";
 
-  cout << "\nparameters and its weights: ";
+  cout << "\nparameters and its weights:\n";
   for (int i = 0; i < 3; i++) {
     cout << "-> param: " << param_names[i] << " | weight: " << weights[i] << "\n";
   }
