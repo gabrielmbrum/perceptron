@@ -1,41 +1,55 @@
-# ADALINE (Adaptive Linear Element)
-
-This repository contains the implementation of an **ADALINE** neural network, using the **Delta Rule** for weight adjustment and minimization of the Mean Squared Error (MSE). The script allows execution in both **Stochastic** and **Batch** modes.
-
-## Architecture Diagram
-
-The following diagram illustrates the ADALINE architecture implemented here:
+# adaline (adaptive linear neuron)
 
 ![alt text](img/image.png)
 
-## Delta Rule
+## about
 
-The ADALINE uses the Medium Square Error to know when the weights should stop to be recalculated.
+this repository contains the implementation of an **adaline** neural network, using the **delta rule** for weight adjustment and minimization of the mean squared error (MSE). the script allows execution in both **stochastic** and **batch** modes.
 
-The MSE is a squared function, so it has a minimal point and the adaline aims to reach there.
+## concepts
 
-To reach the minimal point, nós usamos a decida do gradiente como guida. O gradiente é calculado pela derivada da função de MSE, então invertemos o vetor para saber a direção do ponto mínio da parábola da função.
+### decision boundary
 
-Então, a variação de peso é definida por
+the decision boundary is a line define by: 
+
+$$w_1 \cdot x_1 + w_2 \cdot x_2 + \dots + w_n \cdot x_n - \theta = 0$$
+
+### delta rule
+
+the adaline uses the mean squared error to determine when weight recalculation should stop.
+
+the MSE is a quadratic function (a parabola), so it has a minimum point, and adaline aims to reach it.
+
+![parable](img/image1.png)
+
+to reach this minimum point, we use gradient descent as a guide. the gradient is calculated from the derivative of the MSE function, and then the vector is inverted to indicate the direction of the parabola's minimum point.
+
+so, the weight variation is defined as
 
 $$
 \Delta w = - lr \cdot \nabla E(w) 
 $$
 
-Tal que E(W) é a função de erro dos pesos w.
+where E(w) is the error function of the weights w.
 
-Expandindo a função E(w), chegamos na definição:
+expanding the function E(w), we obtain:
 
 $$
-w_{atual} = w_{anterior} + lr \sum_{k=1}^{p}(d^{(k)} - u) \cdot x^{(k)}
+w_{current} = w_{previous} + lr \sum_{k=1}^{p}(d^{(k)} - u) \cdot x^{(k)}
 $$
 
-Sendo u a função de ativação do adaline
+where u is the activation function of adaline.
 
-## How to Run
+## how to run
 
-The `adaline.py` script processes data files and generates training and testing results.
+the `adaline.py` script processes data files and generates training and testing results.
 
 ```bash
+python3 -m venv .venv
+
+source .venv/bin/activate
+
+pip install -r requirements.txt
+
 python3 adaline.py
 ```

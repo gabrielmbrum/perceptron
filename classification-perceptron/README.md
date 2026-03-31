@@ -1,73 +1,65 @@
-# Classification Perceptron
-
-This perceptron project is from a master's degree class. It was built to process a training set to discover the weights of *n* parameters and then evaluate its performance on a test set.
-
-The weight balancing is performed using the Hebb rule.
+# classification perceptron
 
 ![diagram](img/image.png)
 
-## Functions
+## about
 
-### Training
+here we have 3 datasets:
 
-The input is the training data, the labels, the learning rate, and the number of epochs.
+- dataset1: 2 attributes | 140 training samples | 60 testing samples
+- dataset2: 2 attributes | 175 training samples | 75 testing samples
+- dataset3: 10 attributes | 147 training samples | 63 testing samples
 
-By the end, it will have the updated weights, the number of completed epochs, and the error during the epochs.
+different of *hebb-perceptron* we update the bias using the **hebb-rule**.
 
-### Testing
+we plot important infos like the training decision boundary, test **decision boundary** and error training during the epochs
 
-Use the learned weights to classify new data (test set).
+## concepts
 
-Calculate the accuracy.
+### decision boundary
 
-## Datasets
+the decision boundary is a line define by: 
 
-### Set #1
+$$w_1 \cdot x_1 + w_2 \cdot x_2 + \dots + w_n \cdot x_n - \theta = 0$$
 
-2 attributes, 140 training samples and 60 testing samples.
+### functions 
 
-epochs = 100 | learning rate = 0.1
+#### training()
+- the input is the training data, the labels, the learning rate, and the number of epochs.
+- by the end, it will have the updated weights, the number of completed epochs, and the error during the epochs.
 
-Calculate and show the accuracy in the training and test sets.
+#### testing()
+- use the learned weights to classify new data (test set).
+- calculate the accuracy.
 
-Plots:
+### hyperparameters
 
-- The training error evolution graph as a function of epochs
+- dataset1: epochs = 100 | learning rate = 0.1
+- dataset2: epochs = 100 | learning rate = 0.1
+- dataset3: epochs $\in \{100, 200, 400\}$ | learning rate $\eta \in \{0.1, 0.001, 0.0001\}$
 
-- The training data with the decision boundary
+### hebb-rule
 
-- The test data with the decision boundary
+the weights are adjusted as in hebb-perceptron, but here the bias is also adjusted as:
 
-Discuss the results and explain what is happening.
+$$
+bias_{i+1} = bias_{i} + lr * error * (-1)
+$$
 
-*Obs.:* the decision boundary is a line define by $w_1 \cdot x_1 + w_2 \cdot x_2 + \dots + w_n \cdot x_n - \theta = 0$
+just to remember, the weight adjust is:
 
-### Set #2
+$$weight_{i + 1} = weights_{i} + lr * (expected_output - output) * input_{i}$$
 
-2 attributes, 175 training samples and 75 testing samples.
+the error is define by the difference between the desired output and the perceptron output.
 
-Repeat the process from Set #1.
+## how to run
 
-### Set #3
+```
+python3 -m venv .venv
 
-10 attributes, 147 training samples and 63 testing samples.
+source .venv/bin/activate
 
-epochs = 100 | learning rate = 0.1
+pip install -r requirements.txt
 
-Calculate the training and testing accuracy.
-
-Plot the training error evolution.
-
-Conduct new tests, varying:
-
-- Check learning rate $\eta \in \{0.1, 0.001, 0.0001\}$
-
-- Number of epochs $\in \{100, 200, 400\}$
-
-For each parameter combination, perform training and testing, plotting the accuracy for each combination.
-
-For each combination, plot the classification error vs. epochs.
-
-Discuss the results and explain what's happening in each case.
-
-Trained and tested 10 times each configuration, to calculate accuracies average and standard deviation.
+python3 perceptron.py
+```

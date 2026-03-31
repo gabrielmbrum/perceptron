@@ -1,56 +1,32 @@
-# perceptron
+# perceptron and adaline: artificial neural networks fundamentals
 
-perceptron is an abstraction of a neuron, its the basic cell of all the giants neural networks that can do amazing things.
+perceptron is an abstraction of a neuron, its the basic cell of all the giants neural networks that can do amazing things, and can be used to solve linear problems.
 
-if you want to learn about this basic cell, this repo is for you! (as it is for me too :>
+adaline is the evolution of the perceptron, which uses some different concepts that will be specified into this repo.
 
-here, i will be coding some code examples of a perceptron (or multiple perceptrons) that are very understandable.
+if you want to learn about this basic cells, this repo is for you! ;)
 
-# muscle-perceptron
+## about
 
-this is the most basic perceptron example, is the easiest to understand, and this perceptron will tell if you will build muscles or not.
+in this repo we have 3 implementations of perceptrons and 1 of an adaline:
 
-here we have three parameters {"working out", "eating healthy", "playing sports"}, the inputs are binary values (yes or no), then i associated weights for each parameter, the bigger the weight, more influent it will be to the output decision.
+- the [muscle-perceptron](./muscle-perceptron/) is a very basic example of a perceptron, it was made "just for fun" and it says if you will build muscles or not.
 
-the output is decided if the sum of the multiplication of the vector of inputs by their weights is bigger than the threshold.
+- the [hebb-perceptron](./hebb-perceptron/) has a simples example too, where the *bias* and the *hebb rule* is introducted. 
 
-# hebb-perceptron
+- the [classification-perceptron](./classification-perceptron/) has a more complex problem, where we test the learning capacity in 3 different datasets.
 
-here the perceptron has a new attribute: the bias.
+- the [classfication-adaline](./adaline/) is used in the same problem of the classification-perceptron.
 
-the bias is important because it improves the capacity of learning of the perceptron. it's used for the output calculation:
+in the classification problems, i wrote reports with some metrics and graphics to evalue each classifier.
 
-$$u = (\sum_{i=1}^{n} weights[i] \cdot inputs[i]) - bias $$
+## requirements
 
-and then we calculate the output
+- python3 (numpy, pandas and matplotlib)
+- c++
+- cmake
 
-$$
-g(u) = 
-\begin{cases} 
-        1, & \text{if } u \ge 0 \\ 
-        0, & \text{if } u < 0 
-\end{cases}
-$$
-
-here, at the case of calculating the wrong desired output the bias is not adjusted, just the weights are update, followwing the **Hebb-Rule**:
-
-$$weight_{i + 1} = weights_{i} + lr * (expected_output - output) * input_{i}$$
-
-# classification-percpeptron
-
-here we used three datasets to train and test in different scenarios.
-
-the dataset 1 and 2 are 2D problems, but the dataset 3 has a 10 dimensions problem.
-
-the weights are adjusted as in hebb-perceptron, but here the bias is also adjusted as:
-
-$$
-bias_{i+1} = bias_{i} + lr * error * (-1)
-$$
-
-the error is define by the difference between the desired output and the perceptron output.
-
-# references
+## references
 
 Neural Networks and Deep Learning - Michael Nielsen [http://neuralnetworksanddeeplearning.com/]
 
