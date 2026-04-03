@@ -1,6 +1,6 @@
 # perceptron and adaline: artificial neural networks fundamentals
 
-perceptron is an abstraction of a neuron, its the basic cell of all the giants neural networks that can do amazing things, and can be used to solve linear problems.
+perceptron is an abstraction of a neuron, its the basic cell of all these giants neural networks that can do amazing things, and can be used to solve linear problems.
 
 adaline is the evolution of the perceptron, which uses some different concepts that will be specified into this repo.
 
@@ -18,7 +18,7 @@ in this repo we have 3 implementations of perceptrons and 1 of an adaline:
 
 - the [classfication-adaline](./adaline/) is used in the same problem of the classification-perceptron.
 
-in the classification problems, i wrote reports with some metrics and graphics to evalue each classifier.
+in the classification problems, i wrote reports with some metrics and graphics to evaluate each classifier.
 
 ## requirements
 
