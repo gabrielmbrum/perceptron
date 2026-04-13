@@ -12,7 +12,7 @@ in this repo we have 3 implementations of perceptrons and 1 of an adaline:
 
 - the [muscle-perceptron](./muscle-perceptron/) is a very basic example of a perceptron, it was made "just for fun" and it says if you will build muscles or not.
 
-- the [hebb-perceptron](./hebb-perceptron/) has a simples example too, where the *bias* and the *hebb rule* is introducted. 
+- the [hebb-perceptron](./hebb-perceptron/) has a simple example too, where the *bias* and the *hebb rule* is introducted. 
 
 - the [classification-perceptron](./classification-perceptron/) has a more complex problem, where we test the learning capacity in 3 different datasets.
 
